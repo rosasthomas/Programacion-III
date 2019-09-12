@@ -1,0 +1,7 @@
+100 - Manzana - Archivos/perrito.jpg
+800 - Naranja - Archivos/perrito.jpg
+700 - Uva - Archivos/perrito.jpg
+900 - Kiwi - Archivos/perrito.jpg
+450 - Lechuga - Archivos/perrito.jpg
+954 - tomate - Archivos/perrito.jpg
+548 - acelga - Archivos/perrito.jpg
