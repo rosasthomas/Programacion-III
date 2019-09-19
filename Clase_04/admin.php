@@ -7,13 +7,44 @@
 
     switch ($_POST["op"]) {
         case 'traerTodos_usuarios':
-            echo "TODOS LOS USUARIOS:<br\>";
+            /*echo "TODOS LOS USUARIOS:<br\>";
             $sql = "SELECT * FROM usuarios";
             $rs = $con->query($sql);
             while ($row = $rs->fetch_object()){
                 $user_arr[] = $row;
             }       
-            var_dump($user_arr); 
+            var_dump($user_arr); */
+            $sql = "SELECT * FROM usuarios";
+            $rs = $con->query($sql);
+            while ($row = $rs->fetch_object()){
+                $user_arr[] = $row;
+            }       
+            $tabla = "<table border=2>
+                        <tr>
+                            <td>Id</td>
+                            <td>Nombre</td>
+                            <td>Apellido</td>
+                            <td>Perfil</td>
+                            <td>Estado</td>
+                        </tr>";
+            if(!$rs){
+                $tabla.= "<tr>
+                            No hay productos
+                            </tr>";
+            }
+            else{
+                for($i=0; $i<count($user_arr); $i++){
+                    $tabla.="<tr> 
+                                <td>".$user_arr[$i]->id."</td>
+                                <td>".$user_arr[$i]->nombre."</td>
+                                <td>".$user_arr[$i]->apellido."</td>
+                                <td>".$user_arr[$i]->perfil."</td>
+                                <td>".$user_arr[$i]->estado."</td>
+                            </tr>";
+                }
+            }
+            $tabla.= "</table>";
+            echo $tabla;
             break;
         case 'traerPorId_usuarios':
             $id_usuario = $_POST["id_usuario"];
@@ -93,21 +124,26 @@
             while ($row = $rs->fetch_object()){
                 $user_arr[] = $row;
             }       
-            $tabla = "<table>
+            $tabla = "<table border=2>
                         <tr>
                             <td>Id</td>
                             <td>Nombre</td>
                             <td>Codigo de Barra</td>
                             <td>Path</td>
-                        <tr>";
+                        </tr>";
             if(!$rs){
                 $tabla.= "<tr>
                             No hay productos
                             </tr>";
             }
             else{
-                foreach ($user_arr as $key => $value) {
-                    # code...
+                for($i=0; $i<count($user_arr); $i++){
+                    $tabla.="<tr> 
+                                <td>".$user_arr[$i]->id."</td>
+                                <td>".$user_arr[$i]->nombre."</td>
+                                <td>".$user_arr[$i]->codigo_barra."</td>
+                                <td>".$user_arr[$i]->path_foto."</td>
+                            </tr>";
                 }
             }
             $tabla.= "</table>";
