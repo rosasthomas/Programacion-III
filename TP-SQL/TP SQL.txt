@@ -1,0 +1,10 @@
+TP SQL Rosas, Thomas.
+1-SELECT * FROM productos ORDER BY productos.pNombre ASC;
+2-SELECT * FROM proveedores WHERE proveedores.Localidad = 'Quilmes';
+3-SELECT * FROM envio WHERE envio.Cantidad >= 200 && envio.Cantidad <= 300;
+4-SELECT SUM(Cantidad) FROM envios;
+5-SELECT Numero FROM envios LIMIT 3;
+6-SELECT proveedores.Nombre, productos.pNombre FROM proveedores,productos,envios WHERE (envios.pNumero = productos.pNumero) GROUP BY proveedores.Nombre 
+7-SELECT SUM(envios.Cantidad) FROM envios WHERE envios.Numero = 102 AND envios.pNumero = 1;
+8-SELECT envios.Cantidad FROM envios WHERE envios.Numero = 102 AND envios.pNumero = 1;
+9-SELECT envios.Numero FROM envios INNER JOIN proveedores ON proveedores.Numero WHERE (proveedores.Localidad='Avellaneda');
