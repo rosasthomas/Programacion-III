@@ -1,10 +1,18 @@
 TP SQL Rosas, Thomas.
 1-SELECT * FROM productos ORDER BY productos.pNombre ASC;
-2-SELECT * FROM proveedores WHERE proveedores.Localidad = 'Quilmes';
-3-SELECT * FROM envio WHERE envio.Cantidad >= 200 && envio.Cantidad <= 300;
+2-SELECT * FROM proveedores WHERE proveedores.Localidad='Quilmes';
+3-SELECT * FROM envio WHERE envio.Cantidad>=200 && envio.Cantidad<=300;
 4-SELECT SUM(Cantidad) FROM envios;
 5-SELECT Numero FROM envios LIMIT 3;
-6-SELECT proveedores.Nombre, productos.pNombre FROM proveedores,productos,envios WHERE (envios.pNumero = productos.pNumero) GROUP BY proveedores.Nombre 
-7-SELECT SUM(envios.Cantidad) FROM envios WHERE envios.Numero = 102 AND envios.pNumero = 1;
-8-SELECT envios.Cantidad FROM envios WHERE envios.Numero = 102 AND envios.pNumero = 1;
-9-SELECT envios.Numero FROM envios INNER JOIN proveedores ON proveedores.Numero WHERE (proveedores.Localidad='Avellaneda');
+6-SELECT productos.pNombre,proveedores.Nombre FROM envios,productos,proveedores WHERE envios.pNumero=productos.pNumero and proveedores.Numero=envios.Numero;
+7-SELECT productos.pPrecio * envios.Cantidad costoTotalDeEnvios FROM productos,envios WHERE envios.pNumero=productos.pNumero;
+8-SELECT SUM(envios.Cantidad) FROM envios WHERE envios.Numero=102 AND envios.pNumero=1;
+9-SELECT envios.pNumero NumeroProductos FROM productos,proveedores,envios WHERE proveedores.Numero=envios.Numero AND proveedores.Localidad='Avellaneda';
+10-SELECT proveedores.Localidad,proveedores.Domicilio FROM proveedores WHERE proveedores.Nombre LIKE '%i%';
+11-INSERT INTO productos (pNumero,pNombre,pPrecio,Tamaño) VALUES(4,'Chocolate',25.35,'Chico');
+12-INSERT INTO proveedores(Numero) VALUES(103);
+13-INSERT INTO proveedores (Numero,Nombre,Localidad) VALUES(107,'Rosales','La Plata');
+14-UPDATE productos SET productos.pPrecio=97.50 WHERE productos.Tamaño='Grande';
+15-UPDATE productos,envios SET productos.Tamaño='Mediano' WHERE productos.pNumero=envios.pNumero AND envios.Cantidad>=300;
+16-DELETE FROM productos WHERE productos.pNumero=1;
+17-DELETE FROM proveedores WHERE proveedores.Numero NOT IN (SELECT envios.Numero FROM envios);
