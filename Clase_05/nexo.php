@@ -1,7 +1,19 @@
 <?php
-    function existeEnBD($correo, $clave):bool{
-        
-    }
+include_once ("AccesoDatos.php");
+include_once ("usuario.php");
 
-    case existe_bd:
-        $retorno = json_encode($correo, $clave);
+    switch ($_POST['op']) {
+        case 'existe':
+            $usuario = json_decode($_POST["usuario"]);
+            if(Usuario::existeEnBD($usuario->correo, $usuario->clave)){
+                echo json_encode($usuario);
+            }
+            else{
+                echo "No existe ese correo";
+            }
+        break;
+        
+        default:
+            echo ":c";
+        break;
+    };

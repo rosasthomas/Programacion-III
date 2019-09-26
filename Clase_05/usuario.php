@@ -9,6 +9,18 @@
         public $correo;
         private $clave;
     
+        public function existeEnBD($correo, $clave):bool{
+            $flag = false;
+            $usuarios = Usuario::TraerTodosLosUsuario();
+            foreach($usuarios as $us){
+                if($us->correo == $correo && $us->clave == $clave){
+                    $flag = true;
+                    break;
+                }
+            }
+            return $flag;
+        }
+
         public function MostrarDatos()
         {
             return $this->id." - ".$this->nombre." - ".$this->apellido." - ".$this->perfil." - ".$this->estado." - ".$this->correo;
@@ -21,9 +33,7 @@
             $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios");        
             
             $consulta->execute();
-            
-            $consulta->setFetchMode(PDO::FETCH_INTO, new Usuario);                                                
-    
+            $consulta->setFetchMode(PDO::FETCH_INTO, new Usuario);     
             return $consulta; 
         }
         

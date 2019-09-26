@@ -11,7 +11,7 @@ class AccesoDatos
             $usuario='root';
             $clave='';
 
-            $this->_objetoPDO = new PDO('mysql:host=localhost;dbname=cdcol;charset=utf8', $usuario, $clave);
+            $this->_objetoPDO = new PDO('mysql:host=localhost;dbname=mercado;charset=utf8', $usuario, $clave);
  
         } catch (PDOException $e) {
  
