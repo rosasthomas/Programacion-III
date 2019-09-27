@@ -92,12 +92,12 @@
             $estado_usuario = $_POST["estado_usuario"];
             $sentence = $pdo->prepare("INSERT INTO usuarios (nombre,apellido,clave,perfil,estado,correo) 
             VALUES(:nombre, :apellido, :clave, :perfil, :estado, :correo)");
-             $consulta->bindValue(':nombre', $nombre_usuario, PDO::PARAM_STR);
-             $consulta->bindValue(':apellido', $apellido_usuario, PDO::PARAM_STR);
-             $consulta->bindValue(':perfil', $clave_usuario, PDO::PARAM_INT);
-             $consulta->bindValue(':estado', $estado_usuario, PDO::PARAM_INT);
-             $consulta->bindValue(':clave', $correo_usuario, PDO::PARAM_STR);
-             $consulta->bindValue(':correo', $clave_usuario, PDO::PARAM_STR);
+             $sentence->bindValue(':nombre', $nombre_usuario, PDO::PARAM_STR);
+             $sentence->bindValue(':apellido', $apellido_usuario, PDO::PARAM_STR);
+             $sentence->bindValue(':perfil', $clave_usuario, PDO::PARAM_INT);
+             $sentence->bindValue(':estado', $estado_usuario, PDO::PARAM_INT);
+             $sentence->bindValue(':clave', $correo_usuario, PDO::PARAM_STR);
+             $sentence->bindValue(':correo', $clave_usuario, PDO::PARAM_STR);
  
             if($sentence->execute()){
                 echo "Se agrego correctamente";
