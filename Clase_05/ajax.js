@@ -26,7 +26,7 @@ function insertar() {
     var perfil = document.getElementById("perfilTxt").value;
     var foto = document.getElementById("foto");
     var usu = { "nombre": nombre, "apellido": apellido, "perfil": perfil, "correo": correo, "clave": clave };
-    form.append('op', "subirFoto");
+    form.append('op', "insertar");
     form.append('foto', foto.files[0]);
     form.append('usuario', JSON.stringify(usu));
     //http.send("usuario="+JSON.stringify(usu)+"&op=insertar");

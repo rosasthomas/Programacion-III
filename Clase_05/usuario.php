@@ -16,7 +16,7 @@
             $this->correo = $datos->correo;
             $this->clave = $datos->clave;
             $this->perfil = $datos->perfil;
-            $this->foto = $datos->foto;
+            $this->foto = $datos;
         }
         /*public function existeEnBD($correo, $clave):bool{
             $flag = false;
@@ -30,6 +30,19 @@
             }
             return $flag;
         }*/
+
+        public static function SubirFoto()
+        {
+            $info = json_decode($_POST["usuario"]);
+            $retorno = false;
+            $destino = "./fotos/" . date("Ymd_His") . ".jpg"; //sigo parado en verificacion.
+            if(move_uploaded_file($_FILES["foto"]["tmp_name"], $destino))
+            {
+                $retorno = $destino;
+            }
+            return $retorno;
+        }
+
         public function TraerPorCorreoYClave($correo, $clave){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             $consulta = $objetoAccesoDato->RetornarConsulta("SELECT correo,clave FROM usuarios WHERE correo='".$correo."'AND clave='".$clave."'");
@@ -43,7 +56,7 @@
 
         public function MostrarDatos()
         {
-            return $this->id." - ".$this->nombre." - ".$this->apellido." - ".$this->perfil." - ".$this->estado." - ".$this->correo;
+            return $this->id." - ".$this->nombre." - ".$this->apellido." - ".$this->perfil." - ".$this->estado." - ".$this->correo." - ".$this->foto;
         }
         
         public static function TraerTodosLosUsuario()
@@ -69,7 +82,7 @@
             $consulta->bindValue(':estado', 1, PDO::PARAM_INT);
             $consulta->bindValue(':clave', $this->clave, PDO::PARAM_STR);
             $consulta->bindValue(':correo', $this->correo, PDO::PARAM_STR);
-            $consulta->bindValue(':foto', $this->foto, PDO::PARAM_STR);
+            $consulta->bindValue(':foto', $this->SubirFoto());
 
             $retorno = false;
 
@@ -99,7 +112,7 @@
     
         }
     
-        public static function EliminarUsuario($usuario)
+        public function EliminarUsuario($usuario)
         {
     
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();

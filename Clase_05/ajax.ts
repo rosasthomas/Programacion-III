@@ -28,7 +28,7 @@ function insertar(){
 
     let usu = {"nombre":nombre,"apellido":apellido, "perfil":perfil,"correo": correo,"clave": clave};
 
-    form.append('op', "subirFoto");
+    form.append('op', "insertar");
     form.append('foto', foto.files[0]);
     form.append('usuario', JSON.stringify(usu));
 

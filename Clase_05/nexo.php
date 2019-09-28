@@ -18,21 +18,7 @@ var_dump($_POST['op']);
             else{
                 echo "No se agrego";
             }
-            
         break;  
-        case 'subirFoto':
-            $objRetorno = new stdClass();
-            $objRetorno->Ok = false;
-
-            $destino = "./fotos/" . date("Ymd_His") . ".jpg";
-            
-            if(move_uploaded_file($_FILES["foto"]["tmp_name"], $destino) ){
-                $objRetorno->Ok = true;
-                $objRetorno->Path = $destino;
-            }
-
-            echo json_encode($objRetorno);
-        break;
         default:
             echo ":c";
         break;
