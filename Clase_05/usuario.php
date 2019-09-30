@@ -1,4 +1,5 @@
 <?php
+require_once "AccesoDatos.php";
     class Usuario
     {
         public $id;
@@ -17,7 +18,8 @@
             $this->clave = $datos->clave;
             $this->perfil = $datos->perfil;
             $this->foto = $datos;
-        }
+        }   
+
         /*public function existeEnBD($correo, $clave):bool{
             $flag = false;
             $usuarios = Usuario::TraerPorCorreoYClave($correo,$clave);
@@ -45,29 +47,33 @@
 
         public function TraerPorCorreoYClave($correo, $clave){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            $consulta = $objetoAccesoDato->RetornarConsulta("SELECT correo,clave FROM usuarios WHERE correo='".$correo."'AND clave='".$clave."'");
+            $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios WHERE correo='".$correo."'AND clave='".$clave."'");
             $consulta->execute();
-            $retorno = false;
-            if($consulta->rowCount() > 0){
-                $retorno = true;
+            $aux = "{'existe':false,'user':null}";
+            $json = json_decode($aux);
+            if($consulta->rowCount() > 0){  
+                $json->existe = true;
+                $user = $consulta->();
+                $json->user = $user;
             }
-            return $retorno;
+            return $json;
         }
 
         public function MostrarDatos()
         {
-            return $this->id." - ".$this->nombre." - ".$this->apellido." - ".$this->perfil." - ".$this->estado." - ".$this->correo." - ".$this->foto;
+            return $this->id." - ".$this->nombre." - ".$this->apellido." - ".$this->perfil." - ".$this->estado." - ".$this->correo;
         }
         
         public static function TraerTodosLosUsuario()
         {    
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            
-            $consulta = $objetoAccesoDato->RetornarConsulta("SELECT * FROM usuarios");        
+        
+            $consulta = $objetoAccesoDato->RetornarConsulta("SELECT id,nombre,apellido,clave,perfil,estado,correo FROM usuarios");        
             
             $consulta->execute();
-            $consulta->setFetchMode(PDO::FETCH_INTO, new Usuario);     
-            return $consulta; 
+            
+            $retorno = $consulta->fetchAll(PDO::FETCH_OBJ); 
+            return $retorno; 
         }
         
         public function InsertarElUsuario()

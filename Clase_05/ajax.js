@@ -5,12 +5,12 @@ function comprobar() {
     var correo = document.getElementById('correoTxt').value;
     var clave = document.getElementById("claveTxt").value;
     var usu = { "correo": correo, "clave": clave };
-    http.send("usuario=" + JSON.stringify(usu));
+    http.send("usuario=" + JSON.stringify(usu) + "&op=existe");
     var respuesta;
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
-            respuesta = JSON.parse(http.responseText);
-            console.log(respuesta);
+            //respuesta = JSON.parse(http.responseText);
+            console.log(http.responseText);
         }
     };
 }

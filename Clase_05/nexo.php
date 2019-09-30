@@ -6,8 +6,9 @@ var_dump($_POST['op']);
         case 'existe':
             $usuario = json_decode($_POST["usuario"]);
             $retorno = new stdClass();
-            $retorno->existe=Usuario::TraerPorCorreoYClave($usuario->correo, $usuario->clave);
-            echo json_encode($retorno);
+            $retorno=Usuario::TraerPorCorreoYClave($usuario->correo, $usuario->clave);
+            var_dump($retorno);
+            //echo json_encode($retorno);
         break;    
         case 'insertar':
             $aux = json_decode($_POST['usuario']);
@@ -19,6 +20,9 @@ var_dump($_POST['op']);
                 echo "No se agrego";
             }
         break;  
+        case 'mostrar':
+        $usuarios = Usuario::TraerTodosLosUsuario();
+        var_dump($usuarios);
         default:
             echo ":c";
         break;
