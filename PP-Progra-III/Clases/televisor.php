@@ -50,22 +50,23 @@
             return $this->precio * 1.21;
         }
 
-        public function Modificar($id,$tipo,$precio,$pais,$path){
+        public function Modificar($id){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
             
             $consulta =$objetoAccesoDato->RetornarConsulta("UPDATE televisores SET tipo=:tipo,precio=:precio,pais=:pais,foto=:foto WHERE id=:id");
             
-            $consulta->bindValue(':tipo', $tipo, PDO::PARAM_STR);
-            $consulta->bindValue(':precio', $precio, PDO::PARAM_INT);
-            $consulta->bindValue(':pais', $pais, PDO::PARAM_STR);
-            $consulta->bindValue(':foto', $path, PDO::PARAM_STR);
+            $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
+            $consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
+            $consulta->bindValue(':pais', $this->paisOrigen, PDO::PARAM_STR);
+            $consulta->bindValue(':foto', $this->path, PDO::PARAM_STR);
             $consulta->bindValue(':id',$id,PDO::PARAM_INT);
-            $consulta->execute();
             $flag = false;
+            $consulta->execute();
             if($consulta->rowCount() > 0) 
             {
                 $flag = true;
             }
+           
              return $flag;
         }
 
@@ -95,7 +96,6 @@
 
         public function Filtrar(){
             $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso();
-            var_dump($this);
 
             if($this->tipo != null && $this->paisOrigen == null){
                 $consulta =$objetoAccesoDato->RetornarConsulta("SELECT tipo, precio, pais as paisOrigen, foto as 'path' FROM televisores WHERE tipo=:tipo");

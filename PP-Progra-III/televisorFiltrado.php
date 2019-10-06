@@ -30,7 +30,7 @@
 
                 if($tv->path != null)
                 {
-                    $tabla .= "<td><img src=" . $tv->path . "></td>";
+                    $tabla .= "<td><img src='./televisores/imagenes/" . $tv->path . "'></td>";
                 }
                 else{
                     $tabla.= "<td></td>";

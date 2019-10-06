@@ -19,7 +19,7 @@
             $json = new stdClass();
             $json->exito = false;
             $json->mensaje = "No se pudo borrar el televisor";
-            echo json_decode($json);
+            echo json_encode($json);
         }
     }
     else{
