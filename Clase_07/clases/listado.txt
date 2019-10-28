@@ -1,0 +1,2 @@
+jose,administrador,perro
+oscar,usuario,gato
